@@ -1,14 +1,55 @@
+
 import { Playlist, Song, FolderColor } from './types';
 
-export const FOLDER_COLORS: Record<FolderColor, { from: string, to: string, glow: string }> = {
-  Pink: { from: 'from-rose-500/40', to: 'to-pink-600/30', glow: 'shadow-pink-500/10' },
-  Blue: { from: 'from-blue-500/40', to: 'to-cyan-600/30', glow: 'shadow-blue-500/10' },
-  Purple: { from: 'from-purple-500/40', to: 'to-indigo-600/30', glow: 'shadow-purple-500/10' },
-  Amber: { from: 'from-amber-500/40', to: 'to-yellow-600/30', glow: 'shadow-amber-500/10' },
-  Red: { from: 'from-red-500/40', to: 'to-orange-600/30', glow: 'shadow-red-500/10' },
-  Teal: { from: 'from-teal-500/40', to: 'to-emerald-600/30', glow: 'shadow-teal-500/10' },
-  Violet: { from: 'from-violet-500/40', to: 'to-purple-600/30', glow: 'shadow-violet-500/10' },
-  Slate: { from: 'from-slate-500/40', to: 'to-gray-600/30', glow: 'shadow-slate-500/10' },
+export const FOLDER_COLORS: Record<FolderColor, { from: string, to: string, glow: string, gradient: string }> = {
+  Pink: { 
+    from: 'from-pink-400/30', 
+    to: 'to-rose-300/30', 
+    glow: 'rgba(244, 114, 182, 0.3)',
+    gradient: 'linear-gradient(144.31deg, rgba(244, 114, 182, 0.5) 0%, rgba(253, 164, 175, 0.5) 100%)'
+  },
+  Blue: { 
+    from: 'from-blue-400/30', 
+    to: 'to-cyan-300/30', 
+    glow: 'rgba(96, 165, 250, 0.3)',
+    gradient: 'linear-gradient(144.31deg, rgba(96, 165, 250, 0.5) 0%, rgba(103, 232, 249, 0.5) 100%)'
+  },
+  Purple: { 
+    from: 'from-purple-400/30', 
+    to: 'to-indigo-300/30', 
+    glow: 'rgba(192, 132, 252, 0.3)',
+    gradient: 'linear-gradient(144.31deg, rgba(192, 132, 252, 0.5) 0%, rgba(165, 180, 252, 0.5) 100%)'
+  },
+  Amber: { 
+    from: 'from-amber-400/30', 
+    to: 'to-yellow-300/30', 
+    glow: 'rgba(251, 191, 36, 0.3)',
+    gradient: 'linear-gradient(144.31deg, rgba(251, 191, 36, 0.5) 0%, rgba(253, 224, 71, 0.5) 100%)'
+  },
+  Red: { 
+    from: 'from-red-400/30', 
+    to: 'to-orange-300/30', 
+    glow: 'rgba(248, 113, 113, 0.3)',
+    gradient: 'linear-gradient(144.31deg, rgba(248, 113, 113, 0.5) 0%, rgba(253, 186, 116, 0.5) 100%)'
+  },
+  Teal: { 
+    from: 'from-teal-400/30', 
+    to: 'to-emerald-300/30', 
+    glow: 'rgba(45, 212, 191, 0.3)',
+    gradient: 'linear-gradient(144.31deg, rgba(45, 212, 191, 0.5) 0%, rgba(110, 231, 183, 0.5) 100%)'
+  },
+  Violet: { 
+    from: 'from-violet-400/30', 
+    to: 'to-purple-300/30', 
+    glow: 'rgba(167, 139, 250, 0.3)',
+    gradient: 'linear-gradient(144.31deg, rgba(167, 139, 250, 0.5) 0%, rgba(216, 180, 254, 0.5) 100%)'
+  },
+  Slate: { 
+    from: 'from-slate-400/30', 
+    to: 'to-gray-300/30', 
+    glow: 'rgba(148, 163, 184, 0.3)',
+    gradient: 'linear-gradient(144.31deg, rgba(148, 163, 184, 0.5) 0%, rgba(209, 213, 219, 0.5) 100%)'
+  },
 };
 
 export const MOCK_LYRICS = [

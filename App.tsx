@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useMemo } from 'react';
 import { Search, ArrowLeft, Play, MoreVertical, Trash2, Plus, Music2, Heart, Moon, Coffee, Sun, TrendingUp, Headphones, Cloud, Clock, Edit3 } from 'lucide-react';
 import { View, Playlist, Song, Toast as ToastType, FolderColor } from './types';
@@ -92,7 +93,6 @@ const App: React.FC = () => {
     }
 
     if (editingPlaylistId) {
-      // Update
       setPlaylists(prev => prev.map(p => 
         p.id === editingPlaylistId 
           ? { ...p, name: playlistName, color: playlistColor, iconType: playlistIcon } 
@@ -103,7 +103,6 @@ const App: React.FC = () => {
       }
       addToast('Playlist updated successfully!');
     } else {
-      // Create
       const newList: Playlist = {
         id: Math.random().toString(),
         name: playlistName,
@@ -149,7 +148,6 @@ const App: React.FC = () => {
     );
   }, [selectedPlaylist, searchQuery]);
 
-  // Icon mapping for Modal
   const ModalIconMap = { Heart, Moon, Coffee, Sun, TrendingUp, Headphones, Cloud, Clock };
 
   return (
@@ -168,7 +166,7 @@ const App: React.FC = () => {
         {/* Playlists Grid */}
         {currentView === View.PLAYLISTS && (
           <div className="max-w-md mx-auto space-y-8 animate-in fade-in slide-in-from-bottom-2 duration-500">
-            <header className="space-y-1">
+            <header className="space-y-1 mb-8">
               <h1 className="text-2xl font-bold text-slate-100 tracking-tight">Your Playlists</h1>
               <p className="text-slate-400/70 text-sm font-medium">{playlists.length} playlists • {playlists.reduce((a, b) => a + b.songCount, 0)} songs total</p>
             </header>
@@ -189,24 +187,26 @@ const App: React.FC = () => {
                 />
               ))}
               
-              {/* Realistic Create New Folder Card */}
-              <div 
+              {/* Create New Folder Card */}
+              <button
                 onClick={openCreateModal}
-                className="group relative cursor-pointer w-full h-[140px] select-none active:scale-95 transition-transform duration-300"
+                className="group relative transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] w-full h-32"
               >
-                <div className="absolute -top-[10px] left-4 w-16 h-4 rounded-t-[10px] bg-slate-700/40 border border-slate-600/20 border-b-0 z-0 group-hover:bg-slate-700/60 transition-colors" />
-                <div className="relative h-32 w-full bg-slate-800/20 border border-slate-700/40 rounded-2xl backdrop-blur-sm shadow-lg group-hover:shadow-2xl group-hover:bg-slate-800/40 transition-all duration-300 z-10 overflow-hidden">
-                  <div className="h-full flex flex-col items-center justify-center gap-3">
-                    <div className="w-12 h-12 flex items-center justify-center bg-slate-700/30 rounded-2xl shadow-inner group-hover:bg-slate-700/50 group-hover:scale-110 transition-all duration-300">
-                      <Plus size={24} className="text-slate-400/80" strokeWidth={2.5} />
+                <div className="absolute bg-gradient-to-b border-[1.094px] border-b-0 border-[rgba(69,85,108,0.5)] border-solid from-[rgba(69,85,108,0.8)] h-4 left-4 rounded-tl-[10px] rounded-tr-[10px] to-[rgba(49,65,88,0.8)] top-[-12px] w-16 group-hover:from-[rgba(69,85,108,0.9)] group-hover:to-[rgba(49,65,88,0.9)] transition-all duration-300" />
+                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500 z-0 bg-gradient-to-br from-slate-400/30 to-slate-500/30" />
+                <div className="absolute border-[1.094px] border-[rgba(69,85,108,0.3)] border-dashed border-solid h-full left-0 overflow-clip rounded-2xl top-0 w-full z-10 shadow-lg group-hover:shadow-2xl group-hover:border-[rgba(69,85,108,0.5)] transition-all duration-300 bg-slate-800/20 backdrop-blur-sm">
+                  <div className="absolute content-stretch flex flex-col h-full items-center justify-center left-0 top-0 w-full gap-2">
+                    <div className="bg-[rgba(255,255,255,0.1)] relative rounded-2xl shrink-0 size-12 group-hover:bg-[rgba(255,255,255,0.15)] group-hover:scale-110 transition-all duration-300 flex items-center justify-center">
+                      <Plus className="w-6 h-6 text-slate-300 group-hover:text-slate-100 transition-colors duration-300" strokeWidth={2.5} />
                     </div>
-                    <span className="text-slate-400/90 text-[13px] font-bold tracking-tight">New Playlist</span>
+                    <p className="font-medium text-slate-300 group-hover:text-slate-100 text-sm transition-colors duration-300">
+                      New Playlist
+                    </p>
                   </div>
                 </div>
-              </div>
+              </button>
             </div>
 
-            {/* Credit visible only on Playlists page */}
             <footer className="pt-8 text-center text-slate-500/60 text-[10px] tracking-widest uppercase font-medium">
               crafted with ♡ by @wooykung
             </footer>
@@ -224,8 +224,10 @@ const App: React.FC = () => {
               <span className="text-sm font-medium">Back to Playlists</span>
             </button>
 
-            <div className={`relative p-6 rounded-[32px] bg-gradient-to-br ${FOLDER_COLORS[selectedPlaylist.color].from} ${FOLDER_COLORS[selectedPlaylist.color].to} border border-white/5 backdrop-blur-xl shadow-2xl space-y-4 overflow-hidden`}>
-               {/* Pattern for detail header */}
+            <div 
+              className="relative p-6 rounded-[32px] border border-white/5 backdrop-blur-xl shadow-2xl space-y-4 overflow-hidden"
+              style={{ background: FOLDER_COLORS[selectedPlaylist.color].gradient }}
+            >
                <div className="absolute inset-0 opacity-[0.05] pointer-events-none" 
                     style={{ backgroundImage: `radial-gradient(circle, #fff 1.5px, transparent 1.5px)`, backgroundSize: '24px 24px' }} />
                
@@ -394,7 +396,8 @@ const App: React.FC = () => {
                 <button 
                   key={color}
                   onClick={() => setPlaylistColor(color)}
-                  className={`h-10 rounded-xl bg-gradient-to-br ${FOLDER_COLORS[color].from} ${FOLDER_COLORS[color].to} transition-all ${playlistColor === color ? 'ring-4 ring-slate-100 scale-110' : 'opacity-60 hover:opacity-100'}`}
+                  className={`h-10 rounded-xl transition-all ${playlistColor === color ? 'ring-4 ring-slate-100 scale-110' : 'opacity-60 hover:opacity-100'}`}
+                  style={{ background: FOLDER_COLORS[color].gradient }}
                 />
               ))}
             </div>

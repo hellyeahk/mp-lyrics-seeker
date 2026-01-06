@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef, useState } from 'react';
 import { Play, Pause, SkipBack, SkipForward, Heart, Languages, Loader2, ChevronDown } from 'lucide-react';
 import { Song, LyricLine } from '../types';
@@ -70,6 +71,13 @@ const LyricsDisplay: React.FC<LyricsDisplayProps> = ({
   }, [activeLineIndex, showTranslation]);
 
   const handleTranslate = async (lang = targetLang) => {
+    const apiKey = (window as any).process?.env?.API_KEY || "";
+    
+    if (!apiKey) {
+      console.error("API Key is missing. Please check your environment variables.");
+      return;
+    }
+
     // If we're toggling off or the language is the same and we already have it, just toggle visibility
     if (translatedLyrics && lang.code === targetLang.code && showTranslation) {
       setShowTranslation(false);
@@ -85,7 +93,7 @@ const LyricsDisplay: React.FC<LyricsDisplayProps> = ({
     setIsTranslating(true);
     setShowTranslation(false); // Hide old translation while fetching new one
     try {
-      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+      const ai = new GoogleGenAI({ apiKey });
       const prompt = `Translate the following song lyrics into ${lang.name}. Return only the translated lines in a JSON array format, maintaining the exact same number of lines as provided.
       Lyrics:
       ${currentSong.lyrics.map(l => l.text).join('\n')}`;
