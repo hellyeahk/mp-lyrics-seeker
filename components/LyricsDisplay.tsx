@@ -163,15 +163,16 @@ const LyricsDisplay: React.FC<LyricsDisplayProps> = ({
               <div 
                 key={idx}
                 id={`lyric-line-${idx}`}
-                className={`flex flex-col items-center gap-1.5 transition-all duration-700 leading-relaxed ${
-                  isCurrent ? 'scale-105' : 'scale-100'
+                onClick={() => onSeek(line.time)}
+                className={`flex flex-col items-center gap-1.5 transition-all duration-700 leading-relaxed cursor-pointer active:scale-95 group/line ${
+                  isCurrent ? 'scale-105' : 'scale-100 hover:scale-[1.02]'
                 }`}
               >
                 <div 
                   className={`transition-all duration-700 ${
                     isCurrent ? 'text-xl font-medium text-slate-100' :
-                    isPast ? 'text-base text-slate-600/40' :
-                    'text-base text-slate-600/35'
+                    isPast ? 'text-base text-slate-600/40 group-hover/line:text-slate-400/60' :
+                    'text-base text-slate-600/35 group-hover/line:text-slate-400/60'
                   }`}
                   style={{ letterSpacing: isCurrent ? '-0.01em' : 'normal' }}
                 >
