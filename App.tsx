@@ -192,8 +192,13 @@ const App: React.FC = () => {
                 onClick={openCreateModal}
                 className="group relative transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] w-full h-32"
               >
-                <div className="absolute bg-gradient-to-b border-[1.094px] border-b-0 border-[rgba(69,85,108,0.5)] border-solid from-[rgba(69,85,108,0.8)] h-4 left-4 rounded-tl-[10px] rounded-tr-[10px] to-[rgba(49,65,88,0.8)] top-[-12px] w-16 group-hover:from-[rgba(69,85,108,0.9)] group-hover:to-[rgba(49,65,88,0.9)] transition-all duration-300" />
+                {/* Folder Tab - Behind */}
+                <div className="absolute bg-gradient-to-b border-[1.094px] border-b-0 border-[rgba(69,85,108,0.5)] border-solid from-[rgba(69,85,108,0.8)] h-4 left-4 rounded-tl-[10px] rounded-tr-[10px] to-[rgba(49,65,88,0.8)] top-[-12px] w-16 group-hover:from-[rgba(69,85,108,0.9)] group-hover:to-[rgba(49,65,88,0.9)] transition-all duration-300 z-0" />
+                
+                {/* Glow effect on hover */}
                 <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500 z-0 bg-gradient-to-br from-slate-400/30 to-slate-500/30" />
+                
+                {/* Folder Body - In front */}
                 <div className="absolute border-[1.094px] border-[rgba(69,85,108,0.3)] border-dashed border-solid h-full left-0 overflow-clip rounded-2xl top-0 w-full z-10 shadow-lg group-hover:shadow-2xl group-hover:border-[rgba(69,85,108,0.5)] transition-all duration-300 bg-slate-800/20 backdrop-blur-sm">
                   <div className="absolute content-stretch flex flex-col h-full items-center justify-center left-0 top-0 w-full gap-2">
                     <div className="bg-[rgba(255,255,255,0.1)] relative rounded-2xl shrink-0 size-12 group-hover:bg-[rgba(255,255,255,0.15)] group-hover:scale-110 transition-all duration-300 flex items-center justify-center">
@@ -224,45 +229,59 @@ const App: React.FC = () => {
               <span className="text-sm font-medium">Back to Playlists</span>
             </button>
 
-            <div 
-              className="relative p-6 rounded-[32px] border border-white/5 backdrop-blur-xl shadow-2xl space-y-4 overflow-hidden"
-              style={{ background: FOLDER_COLORS[selectedPlaylist.color].gradient }}
-            >
-               <div className="absolute inset-0 opacity-[0.05] pointer-events-none" 
-                    style={{ backgroundImage: `radial-gradient(circle, #fff 1.5px, transparent 1.5px)`, backgroundSize: '24px 24px' }} />
+            {/* Header Card */}
+            <div className="relative p-6 rounded-[32px] border border-white/5 shadow-2xl space-y-4">
+               {/* Background Layer with Overflow Hidden */}
+               <div 
+                 className="absolute inset-0 rounded-[32px] overflow-hidden backdrop-blur-xl z-0" 
+                 style={{ background: FOLDER_COLORS[selectedPlaylist.color].gradient }}
+               >
+                 <div className="absolute inset-0 opacity-[0.05] pointer-events-none" 
+                      style={{ backgroundImage: `radial-gradient(circle, #fff 1.5px, transparent 1.5px)`, backgroundSize: '24px 24px' }} />
+               </div>
                
-               <div className="relative flex justify-between items-start z-10">
+               {/* Header Content - Use z-30 to ensure it's on top of Play All button */}
+               <div className="relative flex justify-between items-start z-30">
                  <div className="space-y-1">
                    <h1 className="text-3xl font-bold text-white tracking-tighter leading-none">{selectedPlaylist.name}</h1>
                    <p className="text-white/70 text-sm font-bold uppercase tracking-widest">{selectedPlaylist.songCount} songs</p>
                  </div>
+                 
+                 {/* Header Dropdown Menu */}
                  <div className="relative">
                    <button 
                     onClick={() => setIsHeaderMenuOpen(!isHeaderMenuOpen)}
-                    className="p-2 text-white/80 hover:text-white transition-colors"
+                    className="p-2 text-white/80 hover:text-white transition-colors bg-white/10 rounded-full active:scale-90"
                    >
                      <MoreVertical size={20} />
                    </button>
                    {isHeaderMenuOpen && (
-                     <div className="absolute right-0 top-10 w-48 bg-slate-900/95 backdrop-blur-2xl border border-slate-700/50 rounded-xl shadow-2xl py-1 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+                     <div className="absolute right-0 top-12 w-48 bg-slate-900/98 backdrop-blur-3xl border border-slate-700/50 rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.6)] py-2 z-[70] animate-in fade-in slide-in-from-top-2 duration-200">
                        <button 
                          onClick={() => openEditModal(selectedPlaylist)}
-                         className="w-full flex items-center gap-2 px-3 py-2.5 text-xs text-slate-300 font-semibold hover:bg-slate-700/50 transition-colors"
+                         className="w-full flex items-center gap-3 px-4 py-3 text-xs text-slate-200 font-bold hover:bg-white/10 transition-colors"
                        >
-                         <Edit3 size={14} /> Edit Playlist
+                         <div className="w-6 h-6 rounded-lg bg-blue-500/20 flex items-center justify-center text-blue-400">
+                            <Edit3 size={14} />
+                         </div>
+                         Edit Playlist
                        </button>
-                       <div className="h-px bg-slate-700/50 mx-2" />
+                       <div className="h-px bg-slate-700/50 mx-2 my-1" />
                        <button 
                          onClick={() => setIsDeletePlaylistModalOpen(true)}
-                         className="w-full flex items-center gap-2 px-3 py-2.5 text-xs text-red-400 font-semibold hover:bg-red-500/10 transition-colors"
+                         className="w-full flex items-center gap-3 px-4 py-3 text-xs text-red-400 font-bold hover:bg-red-500/10 transition-colors"
                        >
-                         <Trash2 size={14} /> Delete Playlist
+                         <div className="w-6 h-6 rounded-lg bg-red-500/20 flex items-center justify-center text-red-400">
+                            <Trash2 size={14} />
+                         </div>
+                         Delete Playlist
                        </button>
                      </div>
                    )}
                  </div>
                </div>
                
+               {/* Play All Button - Uses z-10 */}
                <button className="relative z-10 flex items-center gap-2 px-6 py-3 bg-white text-slate-900 rounded-full font-bold shadow-lg transition-all active:scale-95">
                  <Play size={18} fill="currentColor" />
                  <span>Play All</span>
@@ -306,7 +325,7 @@ const App: React.FC = () => {
                         <MoreVertical size={16} />
                       </button>
                       {openMenuId === song.id && (
-                        <div className="absolute right-0 top-10 w-48 bg-slate-900/95 backdrop-blur-2xl border border-slate-700/50 rounded-xl shadow-2xl py-1 z-50">
+                        <div className="absolute right-0 bottom-full mb-2 w-48 bg-slate-900/95 backdrop-blur-2xl border border-slate-700/50 rounded-xl shadow-2xl py-1 z-50 animate-in fade-in slide-in-from-bottom-2">
                           <button 
                             onClick={(e) => { e.stopPropagation(); setIsDeleteModalOpen({ isOpen: true, songId: song.id }); setOpenMenuId(null); }}
                             className="w-full flex items-center gap-2 px-3 py-2 text-xs text-red-400 font-semibold hover:bg-red-500/10"

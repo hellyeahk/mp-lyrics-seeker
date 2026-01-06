@@ -3,7 +3,7 @@ import React from 'react';
 
 const FlowerDecoration: React.FC = () => {
   return (
-    <div className="fixed inset-0 pointer-events-none overflow-hidden z-0 opacity-60">
+    <div className="fixed inset-0 pointer-events-none overflow-hidden z-0 opacity-40">
       {/* Top left flowers - with floating animation */}
       <div className="absolute top-8 left-8 opacity-8 animate-float-slow">
         <svg width="40" height="40" viewBox="0 0 40 40" fill="none">

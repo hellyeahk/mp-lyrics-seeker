@@ -78,20 +78,18 @@ const LyricsDisplay: React.FC<LyricsDisplayProps> = ({
       return;
     }
 
-    // If we're toggling off or the language is the same and we already have it, just toggle visibility
     if (translatedLyrics && lang.code === targetLang.code && showTranslation) {
       setShowTranslation(false);
       return;
     }
     
-    // If we have translated lyrics for this language already, just show them
     if (translatedLyrics && lang.code === targetLang.code && !showTranslation) {
       setShowTranslation(true);
       return;
     }
 
     setIsTranslating(true);
-    setShowTranslation(false); // Hide old translation while fetching new one
+    setShowTranslation(false);
     try {
       const ai = new GoogleGenAI({ apiKey });
       const prompt = `Translate the following song lyrics into ${lang.name}. Return only the translated lines in a JSON array format, maintaining the exact same number of lines as provided.
@@ -150,7 +148,7 @@ const LyricsDisplay: React.FC<LyricsDisplayProps> = ({
   };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-160px)] max-w-md mx-auto p-4 space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
+    <div className="flex flex-col h-[calc(100vh-135px)] max-w-md mx-auto p-4 space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
       <div 
         ref={scrollRef}
         className="relative flex-1 bg-slate-800/30 backdrop-blur-xl rounded-[32px] border border-slate-700/40 overflow-y-auto custom-scrollbar px-6 py-12 lyrics-mask text-center"
@@ -169,7 +167,6 @@ const LyricsDisplay: React.FC<LyricsDisplayProps> = ({
                   isCurrent ? 'scale-105' : 'scale-100'
                 }`}
               >
-                {/* Original Lyric */}
                 <div 
                   className={`transition-all duration-700 ${
                     isCurrent ? 'text-xl font-medium text-slate-100' :
@@ -196,7 +193,6 @@ const LyricsDisplay: React.FC<LyricsDisplayProps> = ({
                   ) : line.text}
                 </div>
 
-                {/* Translated Lyric (Stacked) */}
                 {showTranslation && translatedLine && (
                   <div 
                     className={`text-sm font-medium italic transition-all duration-700 px-4 ${

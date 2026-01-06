@@ -27,7 +27,7 @@ const MinimizedPlayer: React.FC<MinimizedPlayerProps> = ({
   return (
     <div 
       onClick={onExpand}
-      className="fixed bottom-20 left-1/2 -translate-x-1/2 w-[calc(100%-40px)] max-w-md bg-slate-800/70 backdrop-blur-xl border border-slate-700/40 rounded-2xl p-3 flex flex-col gap-2.5 shadow-2xl z-40 active:scale-[0.98] transition-all cursor-pointer"
+      className="fixed bottom-[78px] left-1/2 -translate-x-1/2 w-[calc(100%-40px)] max-w-md bg-slate-800/70 backdrop-blur-xl border border-slate-700/40 rounded-2xl p-3 flex flex-col gap-2.5 shadow-2xl z-40 active:scale-[0.98] transition-all cursor-pointer"
     >
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3 overflow-hidden">

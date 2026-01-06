@@ -10,7 +10,8 @@ interface ToastProps {
 
 const Toast: React.FC<ToastProps> = ({ toast, onClose }) => {
   useEffect(() => {
-    const timer = setTimeout(() => onClose(toast.id), 3000);
+    // Reduced timeout to 1 second for faster disappearance
+    const timer = setTimeout(() => onClose(toast.id), 1000);
     return () => clearTimeout(timer);
   }, [toast.id, onClose]);
 
@@ -23,7 +24,7 @@ const Toast: React.FC<ToastProps> = ({ toast, onClose }) => {
   const { icon: Icon, color, bg } = config[toast.type];
 
   return (
-    <div className={`fixed bottom-[140px] left-1/2 -translate-x-1/2 z-[60] flex items-center gap-3 px-4 py-3 bg-slate-900/95 backdrop-blur-xl border border-slate-700/50 rounded-2xl shadow-2xl animate-in fade-in slide-in-from-bottom-4 duration-300 bg-gradient-to-r ${bg} to-transparent w-[calc(100%-40px)] max-w-sm`}>
+    <div className={`fixed bottom-[140px] left-1/2 -translate-x-1/2 z-[60] flex items-center gap-3 px-4 py-3 bg-slate-900/95 backdrop-blur-xl border border-slate-700/50 rounded-2xl shadow-2xl animate-in fade-in slide-in-from-bottom-4 duration-200 bg-gradient-to-r ${bg} to-transparent w-[calc(100%-40px)] max-sm`}>
       <div className={`w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center ${color}`}>
         <Icon size={18} />
       </div>
