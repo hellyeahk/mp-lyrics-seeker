@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useMemo } from 'react';
 import { Search, ArrowLeft, Play, MoreVertical, Trash2, Plus, Music2, Heart, Moon, Coffee, Sun, TrendingUp, Headphones, Cloud, Clock, Edit3 } from 'lucide-react';
 import { View, Playlist, Song, Toast as ToastType, FolderColor } from './types';

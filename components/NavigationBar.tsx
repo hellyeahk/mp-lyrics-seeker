@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { List, Music2 } from 'lucide-react';
 import { View } from '../types';

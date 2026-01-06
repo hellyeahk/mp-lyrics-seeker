@@ -1,4 +1,3 @@
-
 import { Playlist, Song, FolderColor } from './types';
 
 export const FOLDER_COLORS: Record<FolderColor, { from: string, to: string, glow: string }> = {

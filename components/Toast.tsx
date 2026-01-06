@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { CheckCircle2, XCircle, Info } from 'lucide-react';
 import { Toast as ToastType } from '../types';

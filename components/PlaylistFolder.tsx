@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { Heart, Moon, Coffee, Sun, TrendingUp, Headphones, Cloud, Clock } from 'lucide-react';
 import { Playlist } from '../types';

@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import { Play, Pause, SkipBack, SkipForward, Heart, Languages, Loader2, ChevronDown } from 'lucide-react';
 import { Song, LyricLine } from '../types';
