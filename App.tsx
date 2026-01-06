@@ -180,10 +180,6 @@ const App: React.FC = () => {
                     setSelectedPlaylist(playlist);
                     setCurrentView(View.PLAYLIST_DETAIL);
                   }}
-                  onLongPress={() => {
-                    setSelectedPlaylist(playlist);
-                    setIsDeletePlaylistModalOpen(true);
-                  }}
                 />
               ))}
               

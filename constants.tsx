@@ -78,10 +78,5 @@ const MOCK_SONGS: Song[] = [
 export const MOCK_PLAYLISTS: Playlist[] = [
   { id: 'p1', name: 'Chill Vibes', songCount: 12, iconType: 'Coffee', color: 'Amber', songs: MOCK_SONGS },
   { id: 'p2', name: 'Evening Stars', songCount: 8, iconType: 'Moon', color: 'Blue', songs: MOCK_SONGS.slice(0, 3) },
-  { id: 'p3', name: 'Summer Hits', songCount: 24, iconType: 'Sun', color: 'Red', songs: MOCK_SONGS },
-  { id: 'p4', name: 'Coding Flow', songCount: 15, iconType: 'Headphones', color: 'Purple', songs: MOCK_SONGS },
-  { id: 'p5', name: 'Daily Mix', songCount: 30, iconType: 'Clock', color: 'Slate', songs: MOCK_SONGS },
   { id: 'p6', name: 'Favorites', songCount: 42, iconType: 'Heart', color: 'Pink', songs: MOCK_SONGS },
-  { id: 'p7', name: 'On the Go', songCount: 10, iconType: 'TrendingUp', color: 'Teal', songs: MOCK_SONGS },
-  { id: 'p8', name: 'Cloudy Days', songCount: 19, iconType: 'Cloud', color: 'Violet', songs: MOCK_SONGS },
 ];

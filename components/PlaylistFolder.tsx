@@ -1,5 +1,5 @@
 
-import React, { useState, useRef, useEffect } from 'react';
+import React from 'react';
 import { Heart, Moon, Coffee, Sun, TrendingUp, Headphones, Cloud, Clock } from 'lucide-react';
 import { Playlist } from '../types';
 import { FOLDER_COLORS } from '../constants';
@@ -7,7 +7,6 @@ import { FOLDER_COLORS } from '../constants';
 interface PlaylistFolderProps {
   playlist: Playlist;
   onClick: () => void;
-  onLongPress: () => void;
 }
 
 const ICON_MAP = {
@@ -21,61 +20,13 @@ const ICON_MAP = {
   Clock,
 };
 
-const PlaylistFolder: React.FC<PlaylistFolderProps> = ({ playlist, onClick, onLongPress }) => {
+const PlaylistFolder: React.FC<PlaylistFolderProps> = ({ playlist, onClick }) => {
   const Icon = ICON_MAP[playlist.iconType] || Heart;
   const colorScheme = FOLDER_COLORS[playlist.color];
-  
-  const [isPressing, setIsPressing] = useState(false);
-  const [holdProgress, setHoldProgress] = useState(0);
-  const timerRef = useRef<number | null>(null);
-  const progressIntervalRef = useRef<number | null>(null);
-  const longPressThreshold = 800; // ms
-
-  const startPress = () => {
-    setIsPressing(true);
-    setHoldProgress(0);
-    
-    const startTime = Date.now();
-    progressIntervalRef.current = window.setInterval(() => {
-      const elapsed = Date.now() - startTime;
-      const newProgress = Math.min((elapsed / longPressThreshold) * 100, 100);
-      setHoldProgress(newProgress);
-      
-      if (elapsed >= longPressThreshold) {
-        clearInterval(progressIntervalRef.current!);
-        onLongPress();
-        cancelPress();
-      }
-    }, 16);
-
-    timerRef.current = window.setTimeout(() => {
-      // Long press handled by interval check
-    }, longPressThreshold);
-  };
-
-  const cancelPress = () => {
-    setIsPressing(false);
-    setHoldProgress(0);
-    if (timerRef.current) clearTimeout(timerRef.current);
-    if (progressIntervalRef.current) clearInterval(progressIntervalRef.current);
-  };
-
-  const handlePointerUp = () => {
-    if (isPressing && holdProgress < 90) {
-      onClick();
-    }
-    cancelPress();
-  };
-
-  useEffect(() => {
-    return () => cancelPress();
-  }, []);
 
   return (
     <div 
-      onPointerDown={startPress}
-      onPointerUp={handlePointerUp}
-      onPointerLeave={cancelPress}
+      onClick={onClick}
       className="group relative transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] w-full h-32 cursor-pointer select-none"
     >
       {/* Folder Tab - Behind (z-0) */}
@@ -106,26 +57,6 @@ const PlaylistFolder: React.FC<PlaylistFolderProps> = ({ playlist, onClick, onLo
           </svg>
         </div>
         
-        {/* Hold Progress Ring */}
-        {isPressing && (
-          <div className="absolute inset-0 z-30 pointer-events-none">
-            <svg className="absolute top-4 left-4 w-12 h-12 -rotate-90">
-              <circle
-                cx="24"
-                cy="24"
-                r="20"
-                fill="none"
-                stroke="rgba(255, 255, 255, 0.4)"
-                strokeWidth="2"
-                strokeDasharray="125.6"
-                strokeDashoffset={125.6 - (125.6 * holdProgress) / 100}
-                strokeLinecap="round"
-                className="transition-all duration-75"
-              />
-            </svg>
-          </div>
-        )}
-
         {/* Content Container (z-20) */}
         <div className="absolute flex flex-col h-full items-start justify-between left-0 pb-0 pl-4 pr-0 pt-4 top-0 w-full z-20">
           {/* Icon Container */}
