@@ -167,8 +167,8 @@ const App: React.FC = () => {
         {currentView === View.PLAYLISTS && (
           <div className="max-w-md mx-auto space-y-8 animate-in fade-in slide-in-from-bottom-2 duration-500">
             <header className="space-y-1 mb-8">
-              <h1 className="text-2xl font-bold text-slate-100 tracking-tight">Your Playlists</h1>
-              <p className="text-slate-400/70 text-sm font-medium">{playlists.length} playlists • {playlists.reduce((a, b) => a + b.songCount, 0)} songs total</p>
+              <h1 className="text-2xl font-bold text-slate-100 tracking-tight"> UNDER DEVELOPMENT YA BUJANG</h1>
+              <p className="text-slate-400/70 text-sm font-medium">belom bisa dipake</p>
             </header>
 
             <div className="grid grid-cols-2 gap-x-4 gap-y-10">
